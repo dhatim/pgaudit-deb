@@ -2,5 +2,6 @@ language: java
 jdk: oraclejdk8
 install: true
 script: . .travis/script.sh
+sudo: required
 service:
   - docker
