@@ -1,5 +1,5 @@
 Package: postgresql-pgaudit-9.6
-Version: [[version]].[[git.buildnumber]]
+Version: [[version]].[[git.buildNumber]]
 Architecture: amd64
 Maintainer: Dhatim <contact@dhatim.net>
 Depends: postgresql-9.6
