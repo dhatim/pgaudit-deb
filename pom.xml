@@ -90,13 +90,12 @@
                                     <run>cd postgres</run>
                                     <run><![CDATA[su builder -c "git checkout REL9_6_STABLE"]]></run>
                                     <run><![CDATA[su builder -c "./configure --prefix=`pwd`"]]></run>
-                                    <run>make install -s</run>
+                                    <run><![CDATA[su builder -c "make install -s"]]></run>
                                 </runCmds>
                                 <optimise>true</optimise>
                                 <cmd>/wd/build.sh</cmd>
                             </build>
                             <run>
-                                <user>builder</user>
                                 <volumes>
                                     <bind>
                                         <volume>${project.build.directory}:/target</volume>
@@ -125,6 +124,12 @@
                 <artifactId>jdeb</artifactId>
                 <groupId>org.vafer</groupId>
                 <executions>
+                    <!-- Disable default execution from parent POM -->
+                    <execution>
+                        <id>default-jdeb</id>
+                        <phase/>
+                    </execution>
+                    <!-- Actual execution -->
                     <execution>
                         <goals>
                             <goal>jdeb</goal>
