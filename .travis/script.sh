@@ -11,6 +11,7 @@ then
     # deploy to bintray
     DEB_FILE_NAME="$(basename $TRAVIS_BUILD_DIR/target/*.deb)"
     DEB_FILE_PATH="$TRAVIS_BUILD_DIR/target/$DEB_FILE_NAME"
+    echo "Deploying $DEB_FILE_NAME to bintray..."
     curl -T "$DEB_FILE_PATH" -u${BINTRAY_NAME}:${BINTRAY_KEY} "https://api.bintray.com/content/dhatim/deb/pgaudit/${TRAVIS_TAG}/$DEB_FILE_NAME;deb_distribution=jessie;deb_component=main;deb_architecture=amd64"
 else
     # this is a regular build
