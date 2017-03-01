@@ -148,6 +148,20 @@
                                         <filemode>644</filemode>
                                     </mapper>
                                 </data>
+                                <data>
+                                    <type>files</type>
+                                    <paths>
+                                        <path>${project.build.directory}/pgaudit.control</path>
+                                        <path>${project.build.directory}/pgaudit--1.0.sql</path>
+                                    </paths>
+                                    <dst>/usr/share/postgresql/9.6/extension</dst>
+                                    <mapper>
+                                        <type>perm</type>
+                                        <user>root</user>
+                                        <group>root</group>
+                                        <filemode>644</filemode>
+                                    </mapper>
+                                </data>
                             </dataSet>
                         </configuration>
                     </execution>
