@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>root-oss</artifactId>
+        <groupId>org.dhatim</groupId>
+        <version>3.0.0</version>
+    </parent>
+
+    <groupId>org.dhatim</groupId>
+    <artifactId>pgaudit-deb</artifactId>
+    <version>0-SNAPSHOT</version>
+    <packaging>deb</packaging>
+
+    <prerequisites>
+        <maven>3.3.3</maven>
+    </prerequisites>
+
+    <scm>
+        <connection>scm:git:git@github.com:dhatim/pgaudit-deb.git</connection>
+        <tag>HEAD</tag>
+    </scm>
+    
+    <properties>
+        <docker.container.timeout>300000</docker.container.timeout>
+        <dockertag>latest</dockertag>
+    </properties>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.vafer</groupId>
+                <artifactId>jdeb</artifactId>
+            </extension>
+        </extensions>
+        <plugins>
+            <plugin>
+                <groupId>ru.concerteza.buildnumber</groupId>
+                <artifactId>maven-jgit-buildnumber-plugin</artifactId>
+                <version>1.2.10</version>
+                <executions>
+                    <execution>
+                        <id>git-buildnumber</id>
+                        <goals>
+                            <goal>extract-buildnumber</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <javaScriptBuildnumberCallback>
+                                commitsCount
+                            </javaScriptBuildnumberCallback>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <follow>true</follow>
+                    <images>
+                        <image>
+                            <name>docker.dhatim.it/pgaudit-build:%l</name>
+                            <alias>pgaudit-build:${dockertag}</alias>
+                            <build>
+                                <tags>
+                                    <tag>${dockertag}</tag>
+                                </tags>
+                                <from>debian:8</from>
+                                <assembly>
+                                    <basedir>/wd</basedir>
+                                    <descriptor>pgaudit-build.xml</descriptor>
+                                </assembly>
+                                <workdir>/wd</workdir>
+                                <runCmds>
+                                    <run>set -ex</run>
+                                    <run>apt-get update</run>
+                                    <run>apt-get install --assume-yes git gcc bison flex libreadline-dev zlib1g-dev make</run>
+                                    <run>useradd -M builder</run>
+                                    <run>mkdir /build</run>
+                                    <run>chown builder:builder /build</run>
+                                    <run>chmod a+r /wd/*</run>
+                                    <run>chmod 755 /wd /wd/build.sh</run>
+                                    <run>cd /build</run>
+                                    <run><![CDATA[su builder -c "git clone https://github.com/postgres/postgres.git"]]></run>
+                                    <run>cd postgres</run>
+                                    <run><![CDATA[su builder -c "git checkout REL9_6_STABLE"]]></run>
+                                    <run><![CDATA[su builder -c "./configure --prefix=`pwd`"]]></run>
+                                    <run>make install -s</run>
+                                </runCmds>
+                                <optimise>true</optimise>
+                                <cmd>/wd/build.sh</cmd>
+                            </build>
+                            <run>
+                                <user>builder</user>
+                                <volumes>
+                                    <bind>
+                                        <volume>${project.build.directory}:/target</volume>
+                                    </bind>
+                                </volumes>
+                                <wait>
+                                    <time>${docker.container.timeout}</time>
+                                    <log>build complete</log>
+                                </wait>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>build</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-nofork</goal>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>jdeb</artifactId>
+                <groupId>org.vafer</groupId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jdeb</goal>
+                        </goals>
+                        <configuration>
+                            <deb>${project.build.directory}/postgresql-pgaudit-9.6_${project.version}_amd64.deb</deb>
+                            <dataSet>
+                                <data>
+                                    <src>${project.build.directory}/pgaudit.so</src>
+                                    <type>file</type>
+                                    <mapper>
+                                        <prefix>/usr/lib/postgresql/9.6/lib</prefix>
+                                        <type>perm</type>
+                                        <user>root</user>
+                                        <group>root</group>
+                                        <filemode>644</filemode>
+                                    </mapper>
+                                </data>
+                            </dataSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
