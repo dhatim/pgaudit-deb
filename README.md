@@ -1,6 +1,6 @@
 # pgaudit-deb
 
-[![Build Status](https://travis-ci.org/dhatim/pgaudit-deb.svg?branch=master)](https://travis-ci.org/dhatim/pgaudit-deb)
+[![Build Status](https://travis-ci.org/dhatim/pgaudit-deb.svg?branch=master)](https://travis-ci.org/dhatim/pgaudit-deb)  [![Download](https://api.bintray.com/packages/dhatim/deb/pgaudit/images/download.svg) ](https://bintray.com/dhatim/deb/pgaudit/_latestVersion)
 
 This is a debian package for the [pgaudit](http://pgaudit.org/) extension.
 
