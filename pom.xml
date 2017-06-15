@@ -16,10 +16,6 @@
     <version>0-SNAPSHOT</version>
     <packaging>deb</packaging>
 
-    <prerequisites>
-        <maven>3.3.3</maven>
-    </prerequisites>
-
     <scm>
         <connection>scm:git:git@github.com:dhatim/pgaudit-deb.git</connection>
         <tag>HEAD</tag>
