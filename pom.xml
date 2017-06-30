@@ -135,7 +135,7 @@
                                     <type>files</type>
                                     <paths>
                                         <path>${project.build.directory}/pgaudit.control</path>
-                                        <path>${project.build.directory}/pgaudit--1.0.sql</path>
+                                        <path>${project.build.directory}/pgaudit--1.1.1.sql</path>
                                     </paths>
                                     <dst>/usr/share/postgresql/9.6/extension</dst>
                                     <mapper>
