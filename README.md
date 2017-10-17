@@ -1,13 +1,17 @@
 # pgaudit-deb
-
-[![Build Status](https://travis-ci.org/dhatim/pgaudit-deb.svg?branch=master)](https://travis-ci.org/dhatim/pgaudit-deb)
-[![Download](https://api.bintray.com/packages/dhatim/deb/pgaudit/images/download.svg)](https://bintray.com/dhatim/deb/pgaudit/_latestVersion)
+### For PostgreSQL 9.5
+[![Build status](https://travis-ci.org/dhatim/pgaudit-deb.svg?branch=REL_9_5_STABLE)](https://travis-ci.org/dhatim/pgaudit-deb/branches)
+ [ ![Download](https://api.bintray.com/packages/dhatim/deb/pgaudit/images/download.svg?version=1.0.6) ](https://bintray.com/dhatim/deb/pgaudit/1.0.6/link)
+ ### For PostgreSQL 9.6
+[![Build status](https://travis-ci.org/dhatim/pgaudit-deb.svg?branch=REL_9_6_STABLE)](https://travis-ci.org/dhatim/pgaudit-deb/branches)
+[ ![Download](https://api.bintray.com/packages/dhatim/deb/pgaudit/images/download.svg?version=1.1.1) ](https://bintray.com/dhatim/deb/pgaudit/1.1.1/link)
+### For PostgreSQL 10
+[![Build status](https://travis-ci.org/dhatim/pgaudit-deb.svg?branch=REL_10_STABLE)](https://travis-ci.org/dhatim/pgaudit-deb/branches)
+[ ![Download](https://api.bintray.com/packages/dhatim/deb/pgaudit/images/download.svg?version=1.2.0) ](https://bintray.com/dhatim/deb/pgaudit/1.2.0/link)
 
 This is a debian package for the [pgaudit](http://pgaudit.org/) extension.
 
 ## Installation
-
-This package depends on PostgreSQL 9.6.
 
 - Add Dhatim Bintray's debian repository in sources.list:
   ```bash
@@ -19,7 +23,7 @@ This package depends on PostgreSQL 9.6.
   sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
   ```
 
-- Install the `postgresql-pgaudit-9.6` package:
+- Depending on your PostgreSQL version, install the `postgresql-pgaudit-9.5`, `postgresql-pgaudit-9.6` or `postgresql-pgaudit-10` package. For example, with PostgreSQL 9.6:
   ```bash
   sudo apt-get update && sudo apt-get install postgresql-pgaudit-9.6
   ```
