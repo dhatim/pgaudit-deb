@@ -137,7 +137,7 @@
                                         <path>${project.build.directory}/pgaudit.control</path>
                                         <path>${project.build.directory}/pgaudit--1.0.6.sql</path>
                                     </paths>
-                                    <dst>/usr/share/postgresql/9.6/extension</dst>
+                                    <dst>/usr/share/postgresql/9.5/extension</dst>
                                     <mapper>
                                         <type>perm</type>
                                         <user>root</user>
