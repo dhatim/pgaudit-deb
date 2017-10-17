@@ -23,7 +23,7 @@ This is a debian package for the [pgaudit](http://pgaudit.org/) extension.
   sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
   ```
 
-- Depending on your PostgreSQL version, install the `postgresql-pgaudit-9.5`, `postgresql-pgaudit-9.6` or `postgresql-pgaudit-10` package:
+- Depending on your PostgreSQL version, install the `postgresql-pgaudit-9.5`, `postgresql-pgaudit-9.6` or `postgresql-pgaudit-10` package. For example, with PostgreSQL 9.6:
   ```bash
   sudo apt-get update && sudo apt-get install postgresql-pgaudit-9.6
   ```
