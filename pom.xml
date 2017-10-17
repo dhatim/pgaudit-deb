@@ -16,10 +16,6 @@
     <version>0-SNAPSHOT</version>
     <packaging>deb</packaging>
 
-    <prerequisites>
-        <maven>3.3.3</maven>
-    </prerequisites>
-
     <scm>
         <connection>scm:git:git@github.com:dhatim/pgaudit-deb.git</connection>
         <tag>HEAD</tag>
@@ -77,20 +73,7 @@
                                 </assembly>
                                 <workdir>/wd</workdir>
                                 <runCmds>
-                                    <run>set -ex</run>
-                                    <run>apt-get update</run>
-                                    <run>apt-get install --assume-yes git gcc bison flex libreadline-dev zlib1g-dev make</run>
-                                    <run>useradd -M builder</run>
-                                    <run>mkdir /build</run>
-                                    <run>chown builder:builder /build</run>
-                                    <run>chmod a+r /wd/*</run>
-                                    <run>chmod 755 /wd /wd/build.sh</run>
-                                    <run>cd /build</run>
-                                    <run><![CDATA[su builder -c "git clone https://github.com/postgres/postgres.git"]]></run>
-                                    <run>cd postgres</run>
-                                    <run><![CDATA[su builder -c "git checkout REL9_5_STABLE"]]></run>
-                                    <run><![CDATA[su builder -c "./configure --prefix=`pwd`"]]></run>
-                                    <run><![CDATA[su builder -c "make install -s"]]></run>
+                                    <run>/bin/bash /wd/build-image.sh</run>
                                 </runCmds>
                                 <optimise>true</optimise>
                                 <cmd>/wd/build.sh</cmd>
