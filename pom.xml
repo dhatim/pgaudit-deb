@@ -70,7 +70,7 @@
                                 <tags>
                                     <tag>${dockertag}</tag>
                                 </tags>
-                                <from>debian:8</from>
+                                <from>debian:9</from>
                                 <assembly>
                                     <basedir>/wd</basedir>
                                     <descriptor>pgaudit-build.xml</descriptor>
@@ -88,7 +88,7 @@
                                     <run>cd /build</run>
                                     <run><![CDATA[su builder -c "git clone https://github.com/postgres/postgres.git"]]></run>
                                     <run>cd postgres</run>
-                                    <run><![CDATA[su builder -c "git checkout REL9_6_STABLE"]]></run>
+                                    <run><![CDATA[su builder -c "git checkout REL9_5_STABLE"]]></run>
                                     <run><![CDATA[su builder -c "./configure --prefix=`pwd`"]]></run>
                                     <run><![CDATA[su builder -c "make install -s"]]></run>
                                 </runCmds>
@@ -135,13 +135,13 @@
                             <goal>jdeb</goal>
                         </goals>
                         <configuration>
-                            <deb>${project.build.directory}/postgresql-pgaudit-9.6_${project.version}_amd64.deb</deb>
+                            <deb>${project.build.directory}/postgresql-pgaudit-9.5_${project.version}_amd64.deb</deb>
                             <dataSet>
                                 <data>
                                     <src>${project.build.directory}/pgaudit.so</src>
                                     <type>file</type>
                                     <mapper>
-                                        <prefix>/usr/lib/postgresql/9.6/lib</prefix>
+                                        <prefix>/usr/lib/postgresql/9.5/lib</prefix>
                                         <type>perm</type>
                                         <user>root</user>
                                         <group>root</group>
@@ -152,7 +152,7 @@
                                     <type>files</type>
                                     <paths>
                                         <path>${project.build.directory}/pgaudit.control</path>
-                                        <path>${project.build.directory}/pgaudit--1.0.sql</path>
+                                        <path>${project.build.directory}/pgaudit--1.0.6.sql</path>
                                     </paths>
                                     <dst>/usr/share/postgresql/9.6/extension</dst>
                                     <mapper>
