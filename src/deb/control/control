@@ -1,7 +1,7 @@
 Package: postgresql-pgaudit-9.6
 Version: [[version]].[[git.buildnumber]]
 Architecture: amd64
-Maintainer: Dhatim <contact@dhatim.net>
+Maintainer: Dhatim <dev-oss@dhatim.net>
 Depends: postgresql-9.6
 Section: database
 Priority: optional
