@@ -70,7 +70,7 @@
                                 <tags>
                                     <tag>${dockertag}</tag>
                                 </tags>
-                                <from>debian:8</from>
+                                <from>debian:9</from>
                                 <assembly>
                                     <basedir>/wd</basedir>
                                     <descriptor>pgaudit-build.xml</descriptor>
