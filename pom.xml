@@ -118,13 +118,13 @@
                             <goal>jdeb</goal>
                         </goals>
                         <configuration>
-                            <deb>${project.build.directory}/postgresql-pgaudit-9.6_${project.version}_amd64.deb</deb>
+                            <deb>${project.build.directory}/postgresql-pgaudit-10_${project.version}_amd64.deb</deb>
                             <dataSet>
                                 <data>
                                     <src>${project.build.directory}/pgaudit.so</src>
                                     <type>file</type>
                                     <mapper>
-                                        <prefix>/usr/lib/postgresql/9.6/lib</prefix>
+                                        <prefix>/usr/lib/postgresql/10/lib</prefix>
                                         <type>perm</type>
                                         <user>root</user>
                                         <group>root</group>
@@ -135,9 +135,9 @@
                                     <type>files</type>
                                     <paths>
                                         <path>${project.build.directory}/pgaudit.control</path>
-                                        <path>${project.build.directory}/pgaudit--1.1.1.sql</path>
+                                        <path>${project.build.directory}/pgaudit--1.2.sql</path>
                                     </paths>
-                                    <dst>/usr/share/postgresql/9.6/extension</dst>
+                                    <dst>/usr/share/postgresql/10/extension</dst>
                                     <mapper>
                                         <type>perm</type>
                                         <user>root</user>
