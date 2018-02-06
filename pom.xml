@@ -124,7 +124,7 @@
                                     <src>${project.build.directory}/pgaudit.so</src>
                                     <type>file</type>
                                     <mapper>
-                                        <prefix>/usr/lib/postgresql/10/lib</prefix>
+                                        <prefix>/usr/lib/postgresql/9.6/lib</prefix>
                                         <type>perm</type>
                                         <user>root</user>
                                         <group>root</group>
